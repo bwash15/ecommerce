@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import Annoucement from '../components/Annoucement';
 import Footer from '../components/Footer';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import Products from '../components/Products';
+import { mobile, tablet } from '../responsive';
+
 
 const Container = styled.div`
 
@@ -16,8 +18,9 @@ const FilterContainer = styled.div`
     justify-content: space-between;
 `;
 const Filter = styled.div`
-    margin: 20px;
-    
+    margin: 20px;    
+    ${mobile({ margin: "0px 20px", display: "flex", flexDirection: "column" })}
+    ${tablet({ margin: "0px 20px", display: "flex", flexDirection: "column" })}
 `;
 
 const FilterText = styled.div`
@@ -26,9 +29,11 @@ const FilterText = styled.div`
 `;
 
 const Select = styled.select`
-    margin-right: 10px;    
-
+    margin-right: 10px;   
+    ${mobile({ margin: "10px 0px" })}
+    ${tablet({ margin: "10px 0px" })}
 `;
+
 const Option = styled.option``;
 
 

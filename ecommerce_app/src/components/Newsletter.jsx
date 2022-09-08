@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile, tablet } from '../responsive';
 
 const Container = styled.div`
     height: 60vh;
@@ -11,11 +12,15 @@ const Title = styled.h1`
     font-size: 60px;
     font-weight: 300;
     margin-bottom: 20px;
+    ${mobile({ textAlign: "center" })}
+    ${tablet({ textAlign: "center" })}
 `;
 const Desc = styled.div`
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 20px;
+    ${mobile({ textAlign: "center" })}
+    ${tablet({ textAlign: "center" })}
 `;
 const InputContainer = styled.div`
     width: 50%;
@@ -25,6 +30,8 @@ const InputContainer = styled.div`
     justify-content: space-between;
     border: 1px solid lightgray;
     border-radius: 10%;
+    ${mobile({ width: "80% " })}
+    ${tablet({ width: "80% " })}
 `;
 const Input = styled.input`
     border: none;

@@ -9,9 +9,9 @@ import Cart from './pages/Cart';
 function App() {
   return (
     //<Register />
-    // <Login />
+    //<Login />
     <Cart />
-    // <Home />
+    //<Home />
     //<ProductList />
     //<Product />
   );

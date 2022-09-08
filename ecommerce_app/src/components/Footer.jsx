@@ -1,9 +1,12 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
     display: flex;
-
+    ${mobile({ flexDirection: "column" })}
+    ${tablet({ flexDirection: "column" })}
 `;
+
 const Left = styled.div`
     flex: 1;
     display: flex;
@@ -11,19 +14,26 @@ const Left = styled.div`
     padding: 20px;
 
 `;
+
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({ display: "none" })}
+    ${tablet({ display: "none" })}
 `;
+
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    
+    ${mobile({ textAlign: "center" })}
+    ${tablet({ textAlign: "center" })}
 `;
+
 const Title = styled.h3`
     margin-bottom: 30px;
 
 `;
+
 const List = styled.ul`
     margin: 0;
     padding: 0;
@@ -32,6 +42,7 @@ const List = styled.ul`
     flex-wrap: wrap;
 
 `;
+
 const ListItem = styled.li`
     width: 50%;
 

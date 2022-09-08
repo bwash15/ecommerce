@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { sliderItems } from '../data/data';
+import { mobile, tablet } from '../responsive';
 
 const Container = styled.div`
     width: 100%;
@@ -9,6 +10,8 @@ const Container = styled.div`
     background-color: #55bbbb;
     position: relative;
     overflow: hidden;
+    ${mobile({ display: "none" })}
+    ${tablet({ display: "none" })}
 `;
 
 const Arrow = styled.div`
