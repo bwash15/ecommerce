@@ -10,8 +10,8 @@ function App() {
   return (
     //<Register />
     //<Login />
-    <Cart />
-    //<Home />
+    //<Cart />
+    <Home />
     //<ProductList />
     //<Product />
   );
