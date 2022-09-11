@@ -11,9 +11,9 @@ function App() {
     //<Register />
     //<Login />
     //<Cart />
-    <Home />
+    //<Home />
     //<ProductList />
-    //<Product />
+    <Product />
   );
 }
 

@@ -139,19 +139,50 @@ const Product = () => {
                     </Desc>
                     <Price>$20</Price>
                     <FilterContainer>
-                        <FilterTitle>Use Type</FilterTitle>
+                        <FilterTitle>Category</FilterTitle>
                         <TypeFilter>
                             <FilterUseType disabled selected>Industrial</FilterUseType>
                             <FilterUseType>Medicinal</FilterUseType>
+                            <FilterUseType>Recreational</FilterUseType>
                             <FilterUseType>Personal Home</FilterUseType>
                         </TypeFilter>
                     </FilterContainer>
                     <FilterContainer>
-                        <FilterTitle>Quantity</FilterTitle>
+                        <FilterTitle>Product Use</FilterTitle>
                         <ProductFilter>
-                            <FilterProductType disabled selected>1</FilterProductType>
-                            <FilterProductType>2</FilterProductType>
-                            <FilterProductType>3</FilterProductType>
+                            <FilterProductType disabled selected>Agriculture</FilterProductType>
+                            <FilterProductType>Residential Construction</FilterProductType>
+                            <FilterProductType>Commercial Construction</FilterProductType>
+                            <FilterProductType>Clothing</FilterProductType>
+                        </ProductFilter>
+                    </FilterContainer>
+                    <FilterContainer>
+                        <FilterTitle>Product Type</FilterTitle>
+                        <ProductFilter>
+                            <FilterProductType disabled selected>Agriculture</FilterProductType>
+                            <FilterProductType>Residential Construction</FilterProductType>
+                            <FilterProductType>Commercial Construction</FilterProductType>
+                            <FilterProductType>Clothing</FilterProductType>
+                        </ProductFilter>
+                    </FilterContainer>
+                    <FilterContainer>
+                        <FilterTitle>Color</FilterTitle>
+                        <ProductFilter>
+                            <FilterColor disabled selected></FilterColor>
+                            <FilterColor color="black"></FilterColor>
+                            <FilterColor color="gray"></FilterColor>
+                            <FilterColor color="navyblue"></FilterColor>
+                        </ProductFilter>
+                    </FilterContainer>
+                    <FilterContainer>
+                        <FilterTitle>Size</FilterTitle>
+                        <ProductFilter>
+                            <FilterProductType disabled selected></FilterProductType>
+                            <FilterProductType>XL</FilterProductType>
+                            <FilterProductType>L</FilterProductType>
+                            <FilterProductType>M</FilterProductType>
+                            <FilterProductType>S</FilterProductType>
+                            <FilterProductType>Toddler</FilterProductType>
                         </ProductFilter>
                     </FilterContainer>
                     <AddContainer>

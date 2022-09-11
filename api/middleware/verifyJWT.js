@@ -17,8 +17,11 @@ const verfiyJWT = (req, res, next) => {
         return res.status(401).json("User is not Authenticated");
     }
 }
+// ------------------------------------------------------------------------------------
+// What Type of user is requesting access:
 
 const verfiyTokenAndAuthorization = (req, res, next) => {
+    // As long as the user is a verified user, user is authenticated
     verfiyJWT(req, res, () => {
         if (req.user.id === req.params.id || req.user.isAdmin) {
             next();
@@ -27,9 +30,19 @@ const verfiyTokenAndAuthorization = (req, res, next) => {
         }
     })
 }
+const verfiyTokenAndAdmin = (req, res, next) => {
+    // If the user is an Admin, user is authenticated 
+    verfiyJWT(req, res, () => {
+        if (req.user.isAdmin) {
+            next();
+        } else {
+            res.status(403).json("You Shall Not PASS!!!");
+        }
+    })
+}
 
 
-module.exports = { verfiyJWT, verfiyTokenAndAuthorization };
+module.exports = { verfiyJWT, verfiyTokenAndAuthorization, verfiyTokenAndAdmin };
 
 
 

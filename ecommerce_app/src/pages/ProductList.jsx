@@ -58,6 +58,7 @@ const ProductList = () => {
                         <Option>HempCrete</Option>
                         <Option>Hemp Denim</Option>
                         <Option>Hemp Clothing</Option>
+                        <Option>Hemp Pet Bedding</Option>
                     </Select>
                     <Select>
                         <Option disabled selected>
@@ -67,6 +68,27 @@ const ProductList = () => {
                         <Option>Distillites</Option>
                         <Option>HomeGrown</Option>
                         <Option>Gummies</Option>
+                    </Select>
+                    <Select>
+                        <Option disabled selected>
+                            Recreational
+                        </Option>
+                        <Option>Flower</Option>
+                        <Option>Distillites</Option>
+                        <Option>HomeGrown</Option>
+                        <Option>Gummies</Option>
+                        <Option>Hookahs</Option>
+                    </Select>
+                    <Select>
+                        <Option disabled selected>
+                            Personal Use Products
+                        </Option>
+                        <Option>Crude Oils</Option>
+                        <Option>Distillites</Option>
+                        <Option>HomeGrown</Option>
+                        <Option>Gummies</Option>
+                        <Option>Pet Treats</Option>
+                        <Option>Honey-Do List</Option>
                     </Select>
                 </Filter>
                 <Filter>
