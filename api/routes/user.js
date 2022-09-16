@@ -1,9 +1,9 @@
-const { verfiyJWT, verfiyTokenAndAuthorization, verfiyTokenAndAdmin } = require("../middleware/verifyJWT");
-const User = require('../models/User');
-const router = require("express").Router();
+const { verfiyJWT, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require( "../middleware/verifyJWT" );
+const User = require( '../models/User' );
+const router = require( "express" ).Router();
 
 // UPDATE
-router.put("/:id", verfiyTokenAndAuthorization, async (req, res) => {
+router.put( "/:id", verifyTokenAndAuthorization, async ( req, res ) => {
 
     {/** Tested with POSTMAN
         > Tested with the JWT active and present > User Authenticated > successful 
@@ -11,71 +11,71 @@ router.put("/:id", verfiyTokenAndAuthorization, async (req, res) => {
         > Tested with the JWT present but not valid > Failed > token not valid > successful 
     **/}
 
-    if (req.body.password) {
-        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString();
+    if ( req.body.password ) {
+        req.body.password = CryptoJS.AES.encrypt( req.body.password, process.env.PASS_SEC ).toString();
     };
 
     try {
-        const user = await User.findOne({ _id: req.params.id }).exec();
+        const user = await User.findOne( { _id: req.params.id } ).exec();
         // if we do not get an id, returns ID not found(The User does not exist)
-        if (!user) {
-            return res.status(204).json({ "message": `No User Matches ID ${req.params.id}.` });
+        if ( !user ) {
+            return res.status( 204 ).json( { "message": `No User Matches ID ${req.params.id}.` } );
         }
-        console.log("User Found, checking for udpates");
+        console.log( "User Found, checking for udpates" );
         // checking for the firstname and lastname to be submitted
-        if (req.body?.userName) user.userName = req.body.userName;
-        console.log(user.userName);
-        if (req.body?.email) user.email = req.body.email;
-        console.log(user.email);
+        if ( req.body?.userName ) user.userName = req.body.userName;
+        console.log( user.userName );
+        if ( req.body?.email ) user.email = req.body.email;
+        console.log( user.email );
 
         const result = await user.save();
-        res.status(200).json(result);
-    } catch (err) {
-        res.status(500).json(err);
+        res.status( 200 ).json( result );
+    } catch ( err ) {
+        res.status( 500 ).json( err );
     }
 
-});
+} );
 
 // DELETE
-router.delete("/:id", verfiyTokenAndAuthorization, async (req, res) => {
+router.delete( "/:id", verifyTokenAndAuthorization, async ( req, res ) => {
 
     try {
-        if (!req?.params?.id) return res.status(400).json({ 'message': 'User ID required' });
+        if ( !req?.params?.id ) return res.status( 400 ).json( { 'message': 'User ID required' } );
 
-        const user = await User.findOne({ _id: req.params.id }).exec();
+        const user = await User.findOne( { _id: req.params.id } ).exec();
         // if we do not get an id, returns ID not found(The user does not exist)
-        if (!user) {
-            return res.status(204).json({ "message": `user ID not found: ${req.params.id}.` });
+        if ( !user ) {
+            return res.status( 204 ).json( { "message": `user ID not found: ${req.params.id}.` } );
         }
 
-        const result = await user.deleteOne({ _id: req.body.id });
-        res.status(200).json("User has been deleted...");
+        const result = await user.deleteOne( { _id: req.body.id } );
+        res.status( 200 ).json( "User has been deleted..." );
 
-    } catch (err) {
-        console.log(err);
+    } catch ( err ) {
+        console.log( err );
     }
-});
+} );
 
 // GET USER -  Only Admin 
-router.get("/find/:id", verfiyTokenAndAdmin, async (req, res) => {
+router.get( "/find/:id", verifyTokenAndAdmin, async ( req, res ) => {
 
     try {
-        if (!req?.params?.id) return res.status(400).json({ 'message': 'user ID required.' });
-        const user = await User.findOne({ _id: req.params.id }).exec();
+        if ( !req?.params?.id ) return res.status( 400 ).json( { 'message': 'user ID required.' } );
+        const user = await User.findOne( { _id: req.params.id } ).exec();
         // if we do not get an id, returns ID not found(The user does not exist)
-        if (!user) {
-            return res.status(204).json({ "message": `No user Matches ID ${req.params.id}.` });
+        if ( !user ) {
+            return res.status( 204 ).json( { "message": `No user Matches ID ${req.params.id}.` } );
         }
         // user object returned in the doc object    
         const { password, ...others } = user._doc;
-        res.status(200).json(others);
-    } catch (err) {
-        console.log(err);
+        res.status( 200 ).json( others );
+    } catch ( err ) {
+        console.log( err );
     }
-});
+} );
 
 // // GET ALL USERS -  Only Admin 
-// router.get("/", verfiyTokenAndAdmin, async (req, res) => {
+// router.get("/",  verifyTokenAndAdmin, async (req, res) => {
 
 //     try {
 //         const users = await User.find();
@@ -88,25 +88,25 @@ router.get("/find/:id", verfiyTokenAndAdmin, async (req, res) => {
 // });
 
 // GET ALL QUERIED USERS -  Only Admin 
-router.get("/", verfiyTokenAndAdmin, async (req, res) => {
+router.get( "/", verifyTokenAndAdmin, async ( req, res ) => {
     const query = req.query.new;
     try {
-        const users = query ? await User.find().sort({ _id: -1 }).limit(5) : await User.find();
+        const users = query ? await User.find().sort( { _id: -1 } ).limit( 5 ) : await User.find();
         // if we do not get an id, returns ID not found(The user does not exist)
-        if (!users) { return res.status(204).json({ "message": `No Users found...` }); };
-        res.status(200).json(users);
-    } catch (err) {
-        console.log(err);
+        if ( !users ) { return res.status( 204 ).json( { "message": `No Users found...` } ); };
+        res.status( 200 ).json( users );
+    } catch ( err ) {
+        console.log( err );
     }
-});
+} );
 
 // GET USER STATS
-router.get("/stats", verfiyTokenAndAdmin, async (req, res) => {
+router.get( "/stats", verifyTokenAndAdmin, async ( req, res ) => {
     const date = new Date();
-    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+    const lastYear = new Date( date.setFullYear( date.getFullYear() - 1 ) );
 
     try {
-        const data = await User.aggregate([
+        const data = await User.aggregate( [
             { $match: { createdAt: { $gte: lastYear } } },
             {
                 $project: {
@@ -119,12 +119,12 @@ router.get("/stats", verfiyTokenAndAdmin, async (req, res) => {
                     total: { $sum: 1 },
                 }
             }
-        ])
-        res.status(200).json(data);
-    } catch (err) {
-        res.status(500).json(err);
+        ] )
+        res.status( 200 ).json( data );
+    } catch ( err ) {
+        res.status( 500 ).json( err );
     }
-})
+} )
 
 module.exports = router
 

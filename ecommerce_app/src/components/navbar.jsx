@@ -5,8 +5,8 @@ import { mobile, tablet } from '../responsive';
 const Container = styled.div`
     height: fit-content; 
     background-color: #d5cece;
-    ${mobile({ height: "fit-content" })}
-    ${tablet({ height: "fit-content" })}
+    ${mobile( { height: "fit-content" } )}
+    ${tablet( { height: "fit-content" } )}
 `;
 
 const Wrapper = styled.div`
@@ -14,8 +14,8 @@ const Wrapper = styled.div`
     display: flex;    
     justify-content: space-between;
     align-items: center;
-    ${mobile({ padding: "10px 0px" })}
-    ${tablet({ padding: "10px 0px" })}
+    ${mobile( { padding: "10px 0px" } )}
+    ${tablet( { padding: "10px 0px" } )}
 `;
 
 const Left = styled.div`
@@ -26,8 +26,8 @@ const Left = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
-    ${mobile({ display: "none" })}
-    ${tablet({ display: "none" })}
+    ${mobile( { display: "none" } )}
+    ${tablet( { display: "none" } )}
 `;
 
 const SearchContainer = styled.div`       
@@ -40,15 +40,15 @@ const SearchContainer = styled.div`
 const Input = styled.input`
     border: none;
     margin-right: 5px;
-    ${mobile({ width: "50px" })}
-    ${tablet({ width: "50px" })}
+    ${mobile( { width: "50px" } )}
+    ${tablet( { width: "50px" } )}
 `;
 
 const Logo = styled.h1`
     font-weight: bold;
     font-size: 48px; 
-    ${mobile({ fontSize: "24px" })}
-    ${tablet({ fontSize: "24px" })}
+    ${mobile( { fontSize: "24px" } )}
+    ${tablet( { fontSize: "24px" } )}
 `;
 
 const Center = styled.div`    
@@ -61,16 +61,17 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    ${mobile({ flex: 2, justifyContent: "center" })}
-    ${tablet({ flex: 2, justifyContent: "center" })}
+    ${mobile( { flex: 2, justifyContent: "center" } )}
+    ${tablet( { flex: 2, justifyContent: "center" } )}
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled.a`
+    color: black;
     font-size: 14px;
     cursor: pointer;  
     margin-left: 25px;
-    ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-    ${tablet({ fontSize: "12px", marginLeft: "10px" })}
+    ${mobile( { fontSize: "12px", marginLeft: "10px" } )}
+    ${tablet( { fontSize: "12px", marginLeft: "10px" } )}
 `;
 
 const Navbar = () => {
@@ -81,15 +82,15 @@ const Navbar = () => {
                     <Language>EN</Language>
                     <SearchContainer>
                         <Input />
-                        <i class="fa-solid fa-magnifying-glass" style={{ color: "gray", fontSize: 16 }}></i>
+                        <i class="fa-solid fa-magnifying-glass" style={ { color: "gray", fontSize: 16 } }></i>
                     </SearchContainer>
                 </Left>
                 <Center>
                     <Logo>Rooted in Carolina</Logo>
                 </Center>
                 <Right>
-                    <MenuItem>Register</MenuItem>
-                    <MenuItem>Sign In</MenuItem>
+                    <MenuItem href='/register'>Register</MenuItem>
+                    <MenuItem href='/login'>Sign In</MenuItem>
                     <MenuItem>
                         <i class="fa-solid fa-cart-shopping">4</i>
                     </MenuItem>
