@@ -5,9 +5,24 @@ const router = require( "express" ).Router();
 
 // NEW PRODUCT
 router.post( "/", verifyTokenAndAdmin, async ( req, res ) => {
-    const newProduct = new Product( req.body )
+    console.log( "Token Verified, creating product" )
+    const newProduct = new Product( {
+        title: req.body.title,
+        desc: req.body.desc,
+        img: req.body.img,
+        categories: req.body.categories,
+        productUse: req.body.productUse,
+        productType: req.body.productType,
+        color: req.body.color,
+        size: req.body.size,
+        price: req.body.price,
+        inStock: true
+    } )
+    console.log( `new product created from body` )
+    console.log( `${newProduct}` )
     try {
         const savedProduct = await newProduct.save();
+        console.log( "product saved" );
         res.status( 200 ).json( savedProduct );
     } catch ( err ) {
         res.status( 500 ).json( err );
@@ -110,10 +125,8 @@ router.get( "/find/:id", async ( req, res ) => {
 // GET ALL QUERIED PRODUCTS -  Only Admin
 router.get( "/", verifyTokenAndAdmin, async ( req, res ) => {
     const qNew = req.query.new;
-    const qCategory = req.query.productCategory;
-    const qProductUse = req.query.productUse;
-    const qProductType = req.query.productType;
-    const qTitle = req.query.title;
+    const qCategory = req.query.categories;
+
 
     try {
         let products;
@@ -126,27 +139,9 @@ router.get( "/", verifyTokenAndAdmin, async ( req, res ) => {
                     $in: [qCategory],
                 },
             } );
-        } else if ( qProductUse ) {
-            products = await Product.find( {
-                productUse: {
-                    $in: [qProductUse],
-                },
-            } );
-        } else if ( qProductType ) {
-            products = await Product.find( {
-                productType: {
-                    $in: [qProductType],
-                },
-            } );
-        } else if ( qTitle ) {
-            products = await Product.find( {
-                title: {
-                    $in: [qTitle],
-                },
-            } );
         } else {
             products = await Product.find();
-        }
+        };
         // const product = query ? await Product.find().sort({ _id: -1 }).limit(5) : await Product.find();
         // // if we do not get an id, returns ID not found(The user does not exist)
         // if (!product) { return res.status(204).json({ "message": `No product found...` }); };

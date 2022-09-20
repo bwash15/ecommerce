@@ -82,7 +82,7 @@ const Navbar = () => {
                     <Language>EN</Language>
                     <SearchContainer>
                         <Input />
-                        <i class="fa-solid fa-magnifying-glass" style={ { color: "gray", fontSize: 16 } }></i>
+                        <i className="fa-solid fa-magnifying-glass" style={ { color: "gray", fontSize: 16 } }></i>
                     </SearchContainer>
                 </Left>
                 <Center>
@@ -92,7 +92,7 @@ const Navbar = () => {
                     <MenuItem href='/register'>Register</MenuItem>
                     <MenuItem href='/login'>Sign In</MenuItem>
                     <MenuItem>
-                        <i class="fa-solid fa-cart-shopping">4</i>
+                        <i className="fa-solid fa-cart-shopping">4</i>
                     </MenuItem>
                 </Right>
             </Wrapper>

@@ -38,16 +38,31 @@ export const categories = [
         id: 1,
         img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhalfordlewis.com%2Fwp-content%2Fuploads%2F2020%2F05%2FRoastedHempSeeds_Squarex800.jpg&f=1&nofb=1",
         title: "Hemp Seeds, Food and Industry",
+        cat: "industrial",
     },
     {
         id: 2,
         img: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Frhizosciences.com%2Fwp-content%2Fuploads%2F2018%2F10%2FHemp-Biomass-Products-CBD-Oil-Seeds-Fibre.jpg&f=1&nofb=1",
         title: "Hemp, A Natural Biorefinery",
+        cat: "medicinal",
     },
     {
         id: 3,
         img: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fhempinc.com%2Fwp-content%2Fuploads%2F2015%2F11%2FHemp_Infographic-1383x1778.jpg&f=1&nofb=1",
         title: "The Many Uses of Hemp",
+        cat: "recreational",
+    },
+    {
+        id: 4,
+        img: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fhempinc.com%2Fwp-content%2Fuploads%2F2015%2F11%2FHemp_Infographic-1383x1778.jpg&f=1&nofb=1",
+        title: "The Many Uses of Hemp",
+        cat: "personalUse",
+    },
+    {
+        id: 5,
+        img: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fhempinc.com%2Fwp-content%2Fuploads%2F2015%2F11%2FHemp_Infographic-1383x1778.jpg&f=1&nofb=1",
+        title: "The Many Uses of Hemp",
+        cat: "educational",
     },
 ];
 

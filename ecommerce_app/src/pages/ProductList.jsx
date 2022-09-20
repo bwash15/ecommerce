@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router';
 import styled from 'styled-components'
 import Annoucement from '../components/Annoucement';
 import Footer from '../components/Footer';
@@ -19,8 +21,8 @@ const FilterContainer = styled.div`
 `;
 const Filter = styled.div`
     margin: 20px;    
-    ${mobile({ margin: "0px 20px", display: "flex", flexDirection: "column" })}
-    ${tablet({ margin: "0px 20px", display: "flex", flexDirection: "column" })}
+    ${mobile( { margin: "0px 20px", display: "flex", flexDirection: "column" } )}
+    ${tablet( { margin: "0px 20px", display: "flex", flexDirection: "column" } )}
 `;
 
 const FilterText = styled.div`
@@ -30,14 +32,40 @@ const FilterText = styled.div`
 
 const Select = styled.select`
     margin-right: 10px;   
-    ${mobile({ margin: "10px 0px" })}
-    ${tablet({ margin: "10px 0px" })}
+    ${mobile( { margin: "10px 0px" } )}
+    ${tablet( { margin: "10px 0px" } )}
 `;
 
 const Option = styled.option``;
 
 
+
+
 const ProductList = () => {
+
+    const location = useLocation();
+    const cat = location.pathname.split( "/" )[2];
+    const [filters, setFilters] = useState( {} );
+    const [sort, setSort] = useState( "newest" );
+    //const [catFilter, setCatFilters] = useState( {} );
+
+
+    const handleFilters = ( e ) => {
+        const value = e.target.value;
+        setFilters( {
+            ...filters,
+            [e.target.value]: value,
+        } );
+    };
+    console.log( filters )
+
+    // const handleCategoryFilter = ( e ) => {
+    //     const value = e.target.value;
+    //     setCatFilters( {
+    //         [e.target.value]: value,
+    //     } );
+    // }
+    //console.log( catFilter )
     return (
         <Container>
             <Navbar />
@@ -46,63 +74,54 @@ const ProductList = () => {
             <FilterContainer>
                 <Filter>
                     <FilterText>
-                        Filter Hemp Uses:
+                        Filter Categories:
                     </FilterText>
-                    <Select>
-                        <Option disabled selected>
-                            Industrial
+                    <Select name="categories" onChange={ handleFilters }>
+                        <Option disabled>
+                            Hemp Use Categories
                         </Option>
-                        <Option>Hemp Wood Panel Boards</Option>
-                        <Option>Hemp Rope</Option>
-                        <Option>Hemp Livestock Feed</Option>
+                        <Option>Industrial</Option>
+                        <Option>Recreational</Option>
+                        <Option>Medicinal</Option>
+                        <Option>Educational</Option>
+                        <Option>Personal Use</Option>
+                    </Select>
+                    <Select name="productUse" onChange={ handleFilters }>
+                        <Option disabled >
+                            Product Use
+                        </Option>
+                        <Option>Wood Panel Boards</Option>
+                        <Option>Rope</Option>
+                        <Option>Livestock Feed</Option>
                         <Option>HempCrete</Option>
-                        <Option>Hemp Denim</Option>
-                        <Option>Hemp Clothing</Option>
-                        <Option>Hemp Pet Bedding</Option>
+                        <Option>Denim</Option>
+                        <Option>Clothing</Option>
+                        <Option>Pet Bedding</Option>
                     </Select>
-                    <Select>
-                        <Option disabled selected>
-                            Medicinal
-                        </Option>
-                        <Option>Crude Oils</Option>
-                        <Option>Distillites</Option>
-                        <Option>HomeGrown</Option>
-                        <Option>Gummies</Option>
-                    </Select>
-                    <Select>
-                        <Option disabled selected>
-                            Recreational
-                        </Option>
-                        <Option>Flower</Option>
-                        <Option>Distillites</Option>
-                        <Option>HomeGrown</Option>
-                        <Option>Gummies</Option>
-                        <Option>Hookahs</Option>
-                    </Select>
-                    <Select>
-                        <Option disabled selected>
-                            Personal Use Products
+                    <Select name="productType" onChange={ handleFilters }>
+                        <Option disabled >
+                            Product Type
                         </Option>
                         <Option>Crude Oils</Option>
                         <Option>Distillites</Option>
                         <Option>HomeGrown</Option>
                         <Option>Gummies</Option>
                         <Option>Pet Treats</Option>
-                        <Option>Honey-Do List</Option>
                     </Select>
                 </Filter>
                 <Filter>
                     <FilterText>
                         Sort Products:
                     </FilterText>
-                    <Select>
-                        <Option selected>Newest</Option>
-                        <Option>Price (asc)</Option>
-                        <Option>Price (asc)</Option>
+                    <Select onChange={ ( e ) => setSort( e.target.value ) }>
+                        <Option value={ "newest" }>Newest</Option>
+                        <Option value={ "asc" }>Price (asc)</Option>
+                        <Option value={ "desc" }>Price (desc)</Option>
+                        <Option value={ "title" }>Title</Option>
                     </Select>
                 </Filter>
             </FilterContainer>
-            <Products />
+            <Products cat={ cat } filters={ filters } sort={ sort } />
             <Newsletter />
             <Footer />
         </Container>
@@ -110,3 +129,33 @@ const ProductList = () => {
 }
 
 export default ProductList
+
+{/* <Select name="recreational" onChange={ handleFilters }>
+<Option disabled >
+    Recreational
+</Option>
+<Option>Flower</Option>
+<Option>Distillites</Option>
+<Option>HomeGrown</Option>
+<Option>Gummies</Option>
+<Option>Hookahs</Option>
+</Select>
+<Select name="personalUse" onChange={ handleFilters }>
+<Option disabled >
+    Personal Use
+</Option>
+<Option>Crude Oils</Option>
+<Option>Distillites</Option>
+<Option>HomeGrown</Option>
+<Option>Gummies</Option>
+<Option>Honey-Do List</Option>
+</Select>
+<Select name="educational" onChange={ handleFilters }>
+<Option disabled >
+    Educational
+</Option>
+<Option>EndoCannabinoid System</Option>
+<Option>Soil Health</Option>
+<Option>Soil Rejuvenation</Option>
+<Option>Eco System Effects</Option>
+</Select> */}

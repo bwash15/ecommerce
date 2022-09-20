@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/bwash15/web_dev_repo#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.2",
