@@ -5,6 +5,9 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile, tablet } from '../responsive';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
 
@@ -45,11 +48,20 @@ const Price = styled.span`
 
 const FilterContainer = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 40%;
+    padding: 20px;
     margin: 30px 0px;
     ${mobile( { width: "100%" } )}
     ${tablet( { width: "100%" } )}
+`;
+
+const Filter = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
 `;
 
 const FilterTitle = styled.span`
@@ -59,12 +71,20 @@ const FilterTitle = styled.span`
 
 const FilterColor = styled.div`
     width: 20px;
-    height: 20pc;
+    height: 20px;
     border-radius: 50%; 
-    background-color: ${props => props.color};
+    background-color: ${( props ) => props.color};
     margin: 0px 5px;
     cursor: pointer;
 `;
+
+const FilterSize = styled.select`
+  margin-left: 10px;
+  padding: 5px;
+`;
+
+const FilterSizeOption = styled.option``;
+
 
 const TypeFilter = styled.select`
     margin-left: 10px;
@@ -124,73 +144,68 @@ const Button = styled.button`
 
 
 const Product = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split( "/" )[2];
+    const [product, setProduct] = useState( {} );
+
+
+    useEffect( () => {
+        const getProduct = async () => {
+            try {
+                const response = await publicRequest.get( "/products/find/" + id );
+                setProduct( response.data );
+            } catch ( err ) {
+                console.log( err );
+            }
+        }
+        getProduct()
+    }, [id] )
+
+
     return (
         <Container>
             <Navbar />
             <Annoucement />
             <Wrapper>
                 <ImgContainer>
-                    <Image src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.RD2sm2VXB3s8bi154lOgsQHaHN%26pid%3DApi&f=1" />
+                    <Image src={ product.img } />
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>HempCreate Small Block</Title>
+                    <Title>{ product.title }</Title>
                     <Desc>
-                        Product Description will go here .....
+                        { product.desc }
                     </Desc>
-                    <Price>$20</Price>
+                    <Price>{ product.price }</Price>
                     <FilterContainer>
-                        <FilterTitle>Category</FilterTitle>
-                        <TypeFilter>
-                            <FilterUseType disabled selected>Industrial</FilterUseType>
-                            <FilterUseType>Medicinal</FilterUseType>
-                            <FilterUseType>Recreational</FilterUseType>
-                            <FilterUseType>Personal Home</FilterUseType>
-                            <FilterUseType>Personal Home</FilterUseType>
-                        </TypeFilter>
-                    </FilterContainer>
-                    <FilterContainer>
-                        <FilterTitle>Product Use</FilterTitle>
-                        <ProductFilter>
-                            <FilterProductType disabled selected>Agriculture</FilterProductType>
-                            <FilterProductType>Residential Construction</FilterProductType>
-                            <FilterProductType>Commercial Construction</FilterProductType>
-                            <FilterProductType>Clothing</FilterProductType>
-                        </ProductFilter>
-                    </FilterContainer>
-                    <FilterContainer>
-                        <FilterTitle>Product Type</FilterTitle>
-                        <ProductFilter>
-                            <FilterProductType disabled selected>Agriculture</FilterProductType>
-                            <FilterProductType>Residential Construction</FilterProductType>
-                            <FilterProductType>Commercial Construction</FilterProductType>
-                            <FilterProductType>Clothing</FilterProductType>
-                        </ProductFilter>
-                    </FilterContainer>
-                    <FilterContainer>
-                        <FilterTitle>Color</FilterTitle>
-                        <ProductFilter>
-                            <FilterColor disabled selected></FilterColor>
-                            <FilterColor color="black"></FilterColor>
-                            <FilterColor color="gray"></FilterColor>
-                            <FilterColor color="navyblue"></FilterColor>
-                        </ProductFilter>
-                    </FilterContainer>
-                    <FilterContainer>
-                        <FilterTitle>Size</FilterTitle>
-                        <ProductFilter>
-                            <FilterProductType disabled selected></FilterProductType>
-                            <FilterProductType>XL</FilterProductType>
-                            <FilterProductType>L</FilterProductType>
-                            <FilterProductType>M</FilterProductType>
-                            <FilterProductType>S</FilterProductType>
-                            <FilterProductType>Toddler</FilterProductType>
-                        </ProductFilter>
+                        <Filter>
+                            <FilterTitle>Category</FilterTitle>
+                            { product.categories.map( ( cat ) => ( <FilterUseType>{ cat }</FilterUseType> ) ) }
+                        </Filter>
+                        <Filter>
+                            <FilterTitle>Product Use</FilterTitle>
+                            { product.productUse.map( ( use ) => ( <FilterProductType>{ use }</FilterProductType> ) ) }
+                        </Filter>
+                        <Filter>
+                            <FilterTitle>Product Type</FilterTitle>
+                            { product.productType.map( ( type ) => ( <FilterProductType>{ type }</FilterProductType> ) ) }
+                        </Filter>
+                        <Filter>
+                            <FilterTitle>Color</FilterTitle>
+                            { product.color.length > 1
+                                ? product.color.map( ( c ) => ( <FilterColor color={ c } key={ c } /> ) )
+                                : <FilterColor color={ product.color } /> }
+                        </Filter>
+                        <Filter>
+                            <FilterTitle>Size</FilterTitle>
+                            { product.size.map( ( s ) => ( <FilterSizeOption>{ s }</FilterSizeOption> ) ) }
+                        </Filter>
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>
-                            <i class="fa-solid fa-minus"></i>
+                            <i class="fa-solid fa-minus" ></i>
                             <Amount>1</Amount>
-                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-plus" ></i>
                         </AmountContainer>
                         <Button>ADD TO CART</Button>
                     </AddContainer>

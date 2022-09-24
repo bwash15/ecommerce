@@ -70,7 +70,7 @@ const ProductList = () => {
         <Container>
             <Navbar />
             <Annoucement />
-            <Title>The Many Uses of Hemp</Title>
+            <Title>{ cat }</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>
@@ -107,6 +107,26 @@ const ProductList = () => {
                         <Option>HomeGrown</Option>
                         <Option>Gummies</Option>
                         <Option>Pet Treats</Option>
+                    </Select>
+                    <Select name="size" onChange={ handleFilters }>
+                        <Option disabled >
+                            Product Size
+                        </Option>
+                        <Option>XL</Option>
+                        <Option>L</Option>
+                        <Option>M</Option>
+                        <Option>S</Option>
+                        <Option>XS</Option>
+                    </Select>
+                    <Select name="color" onChange={ handleFilters }>
+                        <Option disabled >
+                            Product Color
+                        </Option>
+                        <Option>black</Option>
+                        <Option>white</Option>
+                        <Option>red</Option>
+                        <Option>green</Option>
+                        <Option>blue</Option>
                     </Select>
                 </Filter>
                 <Filter>

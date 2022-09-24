@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 
 const Info = styled.div`
@@ -62,17 +63,19 @@ const Icon = styled.div`
     }
 `;
 
-const Product = ({ item }) => {
+const Product = ( { item } ) => {
     return (
         <Container>
             <Circle />
-            <Image src={item.img} />
+            <Image src={ item.img } />
             <Info>
                 <Icon>
                     <i class="fa-solid fa-cart-shopping"></i>
                 </Icon>
                 <Icon>
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <Link to={ `/product/${item._id}` }>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </Link>
                 </Icon>
                 <Icon>
                     <i class="fa-solid fa-heart"></i>

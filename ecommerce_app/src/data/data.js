@@ -69,7 +69,7 @@ export const categories = [
 export const popularProducts = [
     {
         id: 1,
-        img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.I2GCd6BfA5paA5de2__YlgHaHa%26pid%3DApi&f=1",
+        img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.3pp6fldbnGvHJ9Wl8rQZEgHaHa%26pid%3DApi&f=1",
     },
     {
         id: 2,
